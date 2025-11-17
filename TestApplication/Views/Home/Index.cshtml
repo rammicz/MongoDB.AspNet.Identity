@@ -1,0 +1,59 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Welcome to MongoDB.AspNetCore.Identity Test Application</h1>
+
+<div style="margin: 2rem 0;">
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <div class="alert alert-success">
+            <h3>✅ You are logged in!</h3>
+            <p><strong>User:</strong> @User.Identity.Name</p>
+            <p>This demonstrates successful authentication using MongoDB as the identity store.</p>
+        </div>
+        
+        <p><a asp-controller="Home" asp-action="Secure" class="btn">Visit Secure Page</a></p>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <h3>👋 Welcome!</h3>
+            <p>This is a test application for MongoDB.AspNetCore.Identity - a MongoDB-based provider for ASP.NET Core Identity.</p>
+        </div>
+        
+        <p>
+            <a asp-controller="Account" asp-action="Register" class="btn">Register</a>
+            <a asp-controller="Account" asp-action="Login" class="btn btn-secondary">Login</a>
+        </p>
+    }
+</div>
+
+<h2>Features</h2>
+<ul style="line-height: 2;">
+    <li>✅ .NET 10</li>
+    <li>✅ MongoDB Driver 3.1.0</li>
+    <li>✅ Proper async/await implementation</li>
+    <li>✅ User registration and login</li>
+    <li>✅ Password hashing and security</li>
+    <li>✅ User lockout after failed attempts</li>
+    <li>✅ Role-based authorization</li>
+    <li>✅ Claims-based identity</li>
+</ul>
+
+<h2>How to Test</h2>
+<ol style="line-height: 2;">
+    <li>Make sure MongoDB is running on localhost:27017</li>
+    <li>Click "Register" to create a new account</li>
+    <li>Login with your credentials</li>
+    <li>Visit the "Secure Page" to test authorization</li>
+    <li>Check MongoDB to see user data stored in the AspNetUsers collection</li>
+</ol>
+
+<h2>MongoDB Configuration</h2>
+<div style="background: #f8f9fa; padding: 1rem; border-radius: 4px; margin: 1rem 0;">
+    <p><strong>Connection:</strong> mongodb://localhost:27017</p>
+    <p><strong>Database:</strong> IdentityTestDb</p>
+    <p><strong>Collection:</strong> AspNetUsers</p>
+</div>
+

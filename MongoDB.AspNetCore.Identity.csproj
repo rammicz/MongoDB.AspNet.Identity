@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    
+    <!-- NuGet Package Configuration -->
+    <PackageId>MongoDB.AspNetCore.Identity</PackageId>
+    <Version>2.0.0</Version>
+    <Authors>jsheely, sitebro, contributors</Authors>
+    <Company>MongoDB AspNetCore Identity Contributors</Company>
+    <Description>ASP.NET Core Identity provider that uses MongoDB for storage. Modern implementation for .NET 10 with full async/await support and latest MongoDB driver.</Description>
+    <Copyright>Copyright © 2025</Copyright>
+    <PackageProjectUrl>https://github.com/InspectorIT/MongoDB.AspNet.Identity</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>mongodb;identity;aspnetcore;authentication;net10</PackageTags>
+    <RepositoryUrl>https://github.com/InspectorIT/MongoDB.AspNet.Identity</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>
+      Version 2.0.0
+      - Migrated to .NET 10
+      - Updated to MongoDB.Driver 3.1.0
+      - Migrated from Microsoft.AspNet.Identity to Microsoft.AspNetCore.Identity
+      - Fixed all async/await issues for proper asynchronous operations
+      - Modern SDK-style project format
+      - Full nullable reference types support
+    </PackageReleaseNotes>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="LICENSE" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Exclude test application -->
+    <Compile Remove="TestApplication\**" />
+    <EmbeddedResource Remove="TestApplication\**" />
+    <None Remove="TestApplication\**" />
+    <!-- Exclude old files -->
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+
+</Project>
+

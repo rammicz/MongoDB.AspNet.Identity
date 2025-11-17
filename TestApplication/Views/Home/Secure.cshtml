@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Secure Page";
+}
+
+<h1>🔒 Secure Page</h1>
+
+<div class="alert alert-success">
+    <p>Congratulations! You have successfully accessed this protected page.</p>
+    <p>This page requires authentication, which proves that:</p>
+</div>
+
+<ul style="margin: 2rem 0; line-height: 2;">
+    <li>✅ User registration worked correctly</li>
+    <li>✅ User data was stored in MongoDB</li>
+    <li>✅ Password hashing is working</li>
+    <li>✅ Authentication cookies are set properly</li>
+    <li>✅ Authorization middleware is functioning</li>
+</ul>
+
+<h2>Your User Information</h2>
+<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 4px; margin: 1rem 0;">
+    <p><strong>Username:</strong> @User.Identity?.Name</p>
+    <p><strong>Authenticated:</strong> @User.Identity?.IsAuthenticated</p>
+    <p><strong>Authentication Type:</strong> @User.Identity?.AuthenticationType</p>
+    
+    @if (User.Claims.Any())
+    {
+        <h3 style="margin-top: 1.5rem;">Claims:</h3>
+        <ul>
+            @foreach (var claim in User.Claims)
+            {
+                <li><strong>@claim.Type:</strong> @claim.Value</li>
+            }
+        </ul>
+    }
+</div>
+
+<p>
+    <a asp-controller="Home" asp-action="Index" class="btn">Back to Home</a>
+</p>
+
