@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace MongoDB.AspNetCore.Identity;
+namespace Rammi.MongoDB.AspNetCore.Identity;
 
 /// <summary>
 /// MongoDB implementation of ASP.NET Core Identity UserStore

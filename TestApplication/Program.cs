@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Identity;
-using MongoDB.AspNetCore.Identity;
+using Rammi.MongoDB.AspNetCore.Identity;
 using MongoDB.Driver;
 using TestApplication.Core.Models;
 

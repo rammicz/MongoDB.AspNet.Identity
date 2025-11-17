@@ -3,7 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace MongoDB.AspNetCore.Identity;
+namespace Rammi.MongoDB.AspNetCore.Identity;
 
 /// <summary>
 /// Represents a user in the identity system with MongoDB storage

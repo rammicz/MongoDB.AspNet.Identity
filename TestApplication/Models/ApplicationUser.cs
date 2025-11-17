@@ -1,4 +1,4 @@
-using MongoDB.AspNetCore.Identity;
+using Rammi.MongoDB.AspNetCore.Identity;
 
 namespace TestApplication.Core.Models;
 
