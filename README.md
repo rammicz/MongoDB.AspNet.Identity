@@ -266,7 +266,7 @@ MIT License - See LICENSE file for details
 ## Support
 
 For issues and questions:
-- Open an issue on [GitHub](https://github.com/InspectorIT/MongoDB.AspNet.Identity/issues)
+- Open an issue on [GitHub](https://github.com/rammicz/MongoDB.AspNet.Identity/issues)
 - Check existing issues for solutions
 
 ## Version History

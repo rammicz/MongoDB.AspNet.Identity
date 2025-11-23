@@ -13,11 +13,11 @@
     <Company>MongoDB AspNetCore Identity Contributors</Company>
     <Description>ASP.NET Core Identity provider that uses MongoDB for storage. Modern implementation for .NET Framework 4.8, .NET 8, 9, and 10 with full async/await support and latest MongoDB driver. Maintained by Rammi (https://rammi.cz).</Description>
     <Copyright>Copyright © 2025</Copyright>
-    <PackageProjectUrl>https://github.com/rammi/MongoDB.AspNet.Identity</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/rammicz/MongoDB.AspNet.Identity</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>mongodb;identity;aspnetcore;authentication;net48;net8;net9;net10;netstandard2.1</PackageTags>
-    <RepositoryUrl>https://github.com/rammi/MongoDB.AspNet.Identity</RepositoryUrl>
+    <RepositoryUrl>https://github.com/rammicz/MongoDB.AspNet.Identity</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>
       Version 2.0.2
