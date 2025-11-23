@@ -34,7 +34,7 @@ public class UserStore<TUser> :
     /// <param name="database">The MongoDB database instance.</param>
     public UserStore(IMongoDatabase database)
     {
-        ArgumentNullException.ThrowIfNull(database);
+        if (database is null) throw new ArgumentNullException(nameof(database));
         _usersCollection = database.GetCollection<TUser>(CollectionName);
         EnsureIndexes();
     }
@@ -46,8 +46,8 @@ public class UserStore<TUser> :
     /// <param name="databaseName">Database name.</param>
     public UserStore(string connectionString, string databaseName)
     {
-        ArgumentException.ThrowIfNullOrEmpty(connectionString);
-        ArgumentException.ThrowIfNullOrEmpty(databaseName);
+        if (string.IsNullOrEmpty(connectionString)) throw new ArgumentException("Value cannot be null or empty.", nameof(connectionString));
+        if (string.IsNullOrEmpty(databaseName)) throw new ArgumentException("Value cannot be null or empty.", nameof(databaseName));
 
         var client = new MongoClient(connectionString);
         var database = client.GetDatabase(databaseName);
@@ -87,7 +87,7 @@ public class UserStore<TUser> :
     public async Task<IdentityResult> CreateAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         cancellationToken.ThrowIfCancellationRequested();
 
         try
@@ -108,7 +108,7 @@ public class UserStore<TUser> :
     public async Task<IdentityResult> DeleteAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         cancellationToken.ThrowIfCancellationRequested();
 
         var result = await _usersCollection.DeleteOneAsync(
@@ -148,28 +148,28 @@ public class UserStore<TUser> :
     public Task<string?> GetNormalizedUserNameAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.NormalizedUserName);
     }
 
     public Task<string> GetUserIdAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.Id ?? string.Empty);
     }
 
     public Task<string?> GetUserNameAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.UserName);
     }
 
     public Task SetNormalizedUserNameAsync(TUser user, string? normalizedName, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.NormalizedUserName = normalizedName;
         return Task.CompletedTask;
     }
@@ -177,7 +177,7 @@ public class UserStore<TUser> :
     public Task SetUserNameAsync(TUser user, string? userName, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.UserName = userName;
         return Task.CompletedTask;
     }
@@ -185,7 +185,7 @@ public class UserStore<TUser> :
     public async Task<IdentityResult> UpdateAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         cancellationToken.ThrowIfCancellationRequested();
 
         var result = await _usersCollection.ReplaceOneAsync(
@@ -206,21 +206,21 @@ public class UserStore<TUser> :
     public Task<string?> GetPasswordHashAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.PasswordHash);
     }
 
     public Task<bool> HasPasswordAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.PasswordHash != null);
     }
 
     public Task SetPasswordHashAsync(TUser user, string? passwordHash, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.PasswordHash = passwordHash;
         return Task.CompletedTask;
     }
@@ -232,14 +232,14 @@ public class UserStore<TUser> :
     public Task<string?> GetSecurityStampAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.SecurityStamp);
     }
 
     public Task SetSecurityStampAsync(TUser user, string stamp, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.SecurityStamp = stamp;
         return Task.CompletedTask;
     }
@@ -251,28 +251,28 @@ public class UserStore<TUser> :
     public Task<string?> GetEmailAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.Email);
     }
 
     public Task<bool> GetEmailConfirmedAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.EmailConfirmed);
     }
 
     public Task<string?> GetNormalizedEmailAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.NormalizedEmail);
     }
 
     public Task SetEmailAsync(TUser user, string? email, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.Email = email;
         return Task.CompletedTask;
     }
@@ -280,7 +280,7 @@ public class UserStore<TUser> :
     public Task SetEmailConfirmedAsync(TUser user, bool confirmed, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.EmailConfirmed = confirmed;
         return Task.CompletedTask;
     }
@@ -288,7 +288,7 @@ public class UserStore<TUser> :
     public Task SetNormalizedEmailAsync(TUser user, string? normalizedEmail, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.NormalizedEmail = normalizedEmail;
         return Task.CompletedTask;
     }
@@ -310,21 +310,21 @@ public class UserStore<TUser> :
     public Task<string?> GetPhoneNumberAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.PhoneNumber);
     }
 
     public Task<bool> GetPhoneNumberConfirmedAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.PhoneNumberConfirmed);
     }
 
     public Task SetPhoneNumberAsync(TUser user, string? phoneNumber, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.PhoneNumber = phoneNumber;
         return Task.CompletedTask;
     }
@@ -332,7 +332,7 @@ public class UserStore<TUser> :
     public Task SetPhoneNumberConfirmedAsync(TUser user, bool confirmed, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.PhoneNumberConfirmed = confirmed;
         return Task.CompletedTask;
     }
@@ -344,14 +344,14 @@ public class UserStore<TUser> :
     public Task<bool> GetTwoFactorEnabledAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.TwoFactorEnabled);
     }
 
     public Task SetTwoFactorEnabledAsync(TUser user, bool enabled, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.TwoFactorEnabled = enabled;
         return Task.CompletedTask;
     }
@@ -363,28 +363,28 @@ public class UserStore<TUser> :
     public Task<int> GetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.AccessFailedCount);
     }
 
     public Task<bool> GetLockoutEnabledAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.LockoutEnabled);
     }
 
     public Task<DateTimeOffset?> GetLockoutEndDateAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult(user.LockoutEnd);
     }
 
     public Task<int> IncrementAccessFailedCountAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.AccessFailedCount++;
         return Task.FromResult(user.AccessFailedCount);
     }
@@ -392,7 +392,7 @@ public class UserStore<TUser> :
     public Task ResetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.AccessFailedCount = 0;
         return Task.CompletedTask;
     }
@@ -400,7 +400,7 @@ public class UserStore<TUser> :
     public Task SetLockoutEnabledAsync(TUser user, bool enabled, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.LockoutEnabled = enabled;
         return Task.CompletedTask;
     }
@@ -408,7 +408,7 @@ public class UserStore<TUser> :
     public Task SetLockoutEndDateAsync(TUser user, DateTimeOffset? lockoutEnd, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         user.LockoutEnd = lockoutEnd;
         return Task.CompletedTask;
     }
@@ -420,7 +420,7 @@ public class UserStore<TUser> :
     public Task<IList<Claim>> GetClaimsAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         IList<Claim> claims = user.Claims.Select(c => new Claim(c.ClaimType!, c.ClaimValue!)).ToList();
         return Task.FromResult(claims);
     }
@@ -428,8 +428,8 @@ public class UserStore<TUser> :
     public Task AddClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
-        ArgumentNullException.ThrowIfNull(claims);
+        if (user is null) throw new ArgumentNullException(nameof(user));
+        if (claims is null) throw new ArgumentNullException(nameof(claims));
 
         foreach (var claim in claims)
         {
@@ -448,9 +448,9 @@ public class UserStore<TUser> :
     public Task ReplaceClaimAsync(TUser user, Claim claim, Claim newClaim, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
-        ArgumentNullException.ThrowIfNull(claim);
-        ArgumentNullException.ThrowIfNull(newClaim);
+        if (user is null) throw new ArgumentNullException(nameof(user));
+        if (claim is null) throw new ArgumentNullException(nameof(claim));
+        if (newClaim is null) throw new ArgumentNullException(nameof(newClaim));
 
         var existingClaim = user.Claims.FirstOrDefault(c => c.ClaimType == claim.Type && c.ClaimValue == claim.Value);
         if (existingClaim != null)
@@ -464,8 +464,8 @@ public class UserStore<TUser> :
     public Task RemoveClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
-        ArgumentNullException.ThrowIfNull(claims);
+        if (user is null) throw new ArgumentNullException(nameof(user));
+        if (claims is null) throw new ArgumentNullException(nameof(claims));
 
         foreach (var claim in claims)
         {
@@ -477,7 +477,7 @@ public class UserStore<TUser> :
     public async Task<IList<TUser>> GetUsersForClaimAsync(Claim claim, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(claim);
+        if (claim is null) throw new ArgumentNullException(nameof(claim));
         cancellationToken.ThrowIfCancellationRequested();
 
         var filter = Builders<TUser>.Filter.And(
@@ -495,8 +495,8 @@ public class UserStore<TUser> :
     public Task AddToRoleAsync(TUser user, string roleName, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
-        ArgumentException.ThrowIfNullOrEmpty(roleName);
+        if (user is null) throw new ArgumentNullException(nameof(user));
+        if (string.IsNullOrEmpty(roleName)) throw new ArgumentException("Value cannot be null or empty.", nameof(roleName));
 
         var normalizedRole = roleName.ToUpperInvariant();
         if (!user.Roles.Contains(normalizedRole, StringComparer.OrdinalIgnoreCase))
@@ -509,8 +509,8 @@ public class UserStore<TUser> :
     public Task RemoveFromRoleAsync(TUser user, string roleName, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
-        ArgumentException.ThrowIfNullOrEmpty(roleName);
+        if (user is null) throw new ArgumentNullException(nameof(user));
+        if (string.IsNullOrEmpty(roleName)) throw new ArgumentException("Value cannot be null or empty.", nameof(roleName));
 
         user.Roles.RemoveAll(r => string.Equals(r, roleName, StringComparison.OrdinalIgnoreCase));
         return Task.CompletedTask;
@@ -519,15 +519,15 @@ public class UserStore<TUser> :
     public Task<IList<string>> GetRolesAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
         return Task.FromResult<IList<string>>(user.Roles);
     }
 
     public Task<bool> IsInRoleAsync(TUser user, string roleName, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
-        ArgumentException.ThrowIfNullOrEmpty(roleName);
+        if (user is null) throw new ArgumentNullException(nameof(user));
+        if (string.IsNullOrEmpty(roleName)) throw new ArgumentException("Value cannot be null or empty.", nameof(roleName));
 
         return Task.FromResult(user.Roles.Contains(roleName, StringComparer.OrdinalIgnoreCase));
     }
@@ -535,7 +535,7 @@ public class UserStore<TUser> :
     public async Task<IList<TUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentException.ThrowIfNullOrEmpty(roleName);
+        if (string.IsNullOrEmpty(roleName)) throw new ArgumentException("Value cannot be null or empty.", nameof(roleName));
         cancellationToken.ThrowIfCancellationRequested();
 
         var filter = Builders<TUser>.Filter.AnyEq(u => u.Roles, roleName);
@@ -549,8 +549,8 @@ public class UserStore<TUser> :
     public Task AddLoginAsync(TUser user, UserLoginInfo login, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
-        ArgumentNullException.ThrowIfNull(login);
+        if (user is null) throw new ArgumentNullException(nameof(user));
+        if (login is null) throw new ArgumentNullException(nameof(login));
 
         if (!user.Logins.Any(l => l.LoginProvider == login.LoginProvider && l.ProviderKey == login.ProviderKey))
         {
@@ -567,9 +567,9 @@ public class UserStore<TUser> :
     public Task RemoveLoginAsync(TUser user, string loginProvider, string providerKey, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
-        ArgumentException.ThrowIfNullOrEmpty(loginProvider);
-        ArgumentException.ThrowIfNullOrEmpty(providerKey);
+        if (user is null) throw new ArgumentNullException(nameof(user));
+        if (string.IsNullOrEmpty(loginProvider)) throw new ArgumentException("Value cannot be null or empty.", nameof(loginProvider));
+        if (string.IsNullOrEmpty(providerKey)) throw new ArgumentException("Value cannot be null or empty.", nameof(providerKey));
 
         user.Logins.RemoveAll(l => l.LoginProvider == loginProvider && l.ProviderKey == providerKey);
         return Task.CompletedTask;
@@ -578,7 +578,7 @@ public class UserStore<TUser> :
     public Task<IList<UserLoginInfo>> GetLoginsAsync(TUser user, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentNullException.ThrowIfNull(user);
+        if (user is null) throw new ArgumentNullException(nameof(user));
 
         IList<UserLoginInfo> logins = user.Logins
             .Select(l => new UserLoginInfo(l.LoginProvider!, l.ProviderKey!, l.ProviderDisplayName))
@@ -589,8 +589,8 @@ public class UserStore<TUser> :
     public async Task<TUser?> FindByLoginAsync(string loginProvider, string providerKey, CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        ArgumentException.ThrowIfNullOrEmpty(loginProvider);
-        ArgumentException.ThrowIfNullOrEmpty(providerKey);
+        if (string.IsNullOrEmpty(loginProvider)) throw new ArgumentException("Value cannot be null or empty.", nameof(loginProvider));
+        if (string.IsNullOrEmpty(providerKey)) throw new ArgumentException("Value cannot be null or empty.", nameof(providerKey));
         cancellationToken.ThrowIfCancellationRequested();
 
         var filter = Builders<TUser>.Filter.And(
@@ -613,7 +613,7 @@ public class UserStore<TUser> :
 
     private void ThrowIfDisposed()
     {
-        ObjectDisposedException.ThrowIf(_disposed, GetType().Name);
+        if (_disposed) throw new ObjectDisposedException(GetType().Name);
     }
 
     #endregion
